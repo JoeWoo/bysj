@@ -1,0 +1,80 @@
+<div class="navbar-default navbar-static-side"  style="position: fixed;" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+        <li>
+            <a href="/secure/admin/timeline"> <i class="fa fa-dashboard fa-fw"></i>
+                公告
+            </a>
+        </li>
+         <% if @iadlevel[4]=='1' || @iadlevel[3]=='1'%>
+        <li>
+            <a href="#">
+                <i class="fa fa-bar-chart-o fa-fw"></i>
+                公告管理
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+             <% if @iadlevel[4]=='1'%>
+                <li>
+                    <a href="/secure/admin/edit_tip">公告发布</a>
+                </li>
+                <%end%>
+                 <% if @iadlevel[3]=='1'%>
+                <li>
+                    <a href="/secure/admin/admin_tips">历史公告</a>
+                </li>
+                <% end%>
+            </ul>
+       </li>
+       <%end%>
+             <% if @iadlevel[2]=='1'%>
+        <li>
+            <a href="/secure/admin/admin_student">
+                <i class="fa fa-wrench fa-fw"></i>
+                学生管理
+            </a>
+        </li>
+        <%end%>
+         <% if @iadlevel[1]=='1'%>
+        <li>
+            <a href="/secure/admin/admin_teacher">
+                <i class="fa fa-table fa-fw"></i>
+                教师管理
+            </a>
+        </li>
+        <% end%>
+        <% if @iadlevel[0]=='1'%>
+        <li>
+            <a href="/secure/admin/admin_admin">
+                <i class="fa fa-edit fa-fw"></i>
+                管理员管理
+            </a>
+        </li>
+        <%end%>
+    </ul>
+    <!-- /#side-menu -->
+</div>
+<!-- /.sidebar-collapse -->
+</div>
+<div id="page-wrapper" style="margin-top:-20px;">
+<%=  erb @part %>
+
+<div class="tabbable tabs-left">
+    <div id="hidden-add" style="visibility:hidden">
+        <label class="checkbox-inline">
+            <input type="checkbox" class="adle" id="adlevel0" value="0">管理员管理</label>
+        <label class="checkbox-inline">
+            <input type="checkbox"  class="adle" id="adlevel1" value="0">教师管理</label>
+        <label class="checkbox-inline">
+            <input type="checkbox"  class="adle" id="adlevel2" value="0">学生管理</label>
+        <div>
+            <label class="checkbox-inline">
+                <input type="checkbox"  class="adle" id="adlevel3" value="0">公告管理</label>
+            <label class="checkbox-inline">
+                <input type="checkbox"  class="adle" id="adlevel4" value="0">公告发布</label>
+        </div>
+    </div>
+
+</div>
+</div>
+<script type="text/javascript" src="/vendor/admin.js"></script>

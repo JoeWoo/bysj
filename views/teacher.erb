@@ -1,0 +1,60 @@
+<div class="navbar-default navbar-static-side"  style="position: fixed;" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+        <li>
+            <a href="/secure/teacher/timeline"> <i class="fa fa-dashboard fa-fw"></i>
+                   公告
+            </a>
+        </li>
+        <li>
+            <a href="/secure/teacher/teacher_title">
+                <i class="fa fa-wrench fa-fw"></i>
+                发布课题
+            </a>
+        </li>
+         <li>
+            <a href="#">
+               <i class="fa fa-edit fa-fw"></i>
+                确认报选学生
+                <span class="fa arrow"></span>
+            </a>
+             <ul class="nav nav-second-level">
+             <%  @my_titles.each{  |title|%>
+             <%= "<li><a href=\"/secure/teacher/teacher_confirm/#{title.id}\">#{title.content}</a></li>"%>
+            <% }%>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-sitemap fa-fw"></i> 课题(论文)管理<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse" style="height: auto;">
+            <%  @my_titles.each{  |title|%>
+                <%= "<li><a href=\"#\">#{title.content}<span class=\"fa arrow\"></span></a>"%>
+                         <% title.selecteds.each{ |project|%>
+                         <%=  "<ul class=\"nav nav-third-level collapse\" style=\"height: 0px;\">"%>
+                             <%=  "<li><a href=\"/secure/teacher/teacher_selected/#{project.id}\">#{project.sname}</a></li>"%>
+                             <%= "</ul>"%>
+                        <%}%>
+                <%= "</li>"%>
+            <% }%>
+            </ul>
+            <!-- /.nav-second-level -->
+        </li>
+        <li>
+            <a href="/secure/teacher/teacher_cores">
+                <i class="fa fa-table fa-fw"></i>
+                所有课题
+            </a>
+        </li>
+    </ul>
+    <!-- /#side-menu -->
+</div>
+<!-- /.sidebar-collapse -->
+</div>
+<div id="page-wrapper" style="margin-top:-20px;">
+<%=  erb @part_teacher %>
+
+<div class="tabbable tabs-left">
+<script type="text/javascript" src="/vendor/teacher.js"></script>
+
+</div>
+</div>

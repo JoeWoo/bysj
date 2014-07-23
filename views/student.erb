@@ -1,0 +1,54 @@
+<div class="navbar-default navbar-static-side"  style="position: fixed;" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+        <li>
+            <a href="/secure/student/timeline"> <i class="fa fa-dashboard fa-fw"></i>
+                   公告
+            </a>
+        </li>
+        <li>
+            <a href="/secure/student/student_tempselect">
+                <i class="fa fa-wrench fa-fw"></i>
+                选择课题
+            </a>
+        </li>
+         <li>
+            <a href="/secure/student/student_project">
+               <i class="fa fa-edit fa-fw"></i>
+                我的毕设(论文)
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-bar-chart-o fa-fw"></i>
+                里程碑
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+                <li>
+                    <a href="/secure/student/student_selected/start">开题</a>
+                </li>
+                <li>
+                    <a href="/secure/student/student_selected/middle">中期</a>
+                </li>
+                 <li>
+                    <a href="/secure/student/student_selected/end">结题</a>
+                </li>
+                <li>
+                    <a href="/secure/student/student_selected/final">结论</a>
+                </li>
+            </ul>
+            <!-- /.nav-second-level --> </li>
+    </ul>
+    <!-- /#side-menu -->
+</div>
+<!-- /.sidebar-collapse -->
+</div>
+<div id="page-wrapper" style="margin-top:-20px;">
+<%=  erb @part_student %>
+
+<div class="tabbable tabs-left">
+<script type="text/javascript" src="/vendor/student.js"></script>
+
+</div>
+</div>

@@ -1,0 +1,341 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                <%=@selected_title.content%>
+                >
+                <%= @selected_title.sname%></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.col-lg-12 -->
+            <div style="width:897px;height:164px;background:url(/vendor/img/processbg.png) no-repeat 0px -20px;"></div>
+            <div class="progress" style="margin-top:-100px;">
+                <div class="progress-bar progress-bar-success" style= <%="\"width:#{@selected_title.stat}\""%>
+                    >
+                    <span ><%= @selected_title.stat%> Complete</span>
+                </div>
+            </div>
+            <div class="panel-group" id="accordion" style="margin-top:90px;">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed"> <i class="fa fa-upload fa-fw"></i>
+                                上传回复文件
+                            </a>
+                        </h4>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div id="collapseThree" class="panel-collapse collapse" style="height: 0px;">
+                        <div class="panel-body">
+                            <div class="col-md-6 col-md-offset-3" style="margin-top:-100px;">
+                                <div class="login-panel panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">文件提交</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form role="form" action="/secure/teacher/upload_files" enctype="multipart/form-data" method="post">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <input class="form-control" placeholder="文件主题" name="subject" type="text" autofocus=""></div>
+                                                    <div class="form-group">
+                                                        <select class="form-control"  name="milestone" value="普通">
+                                                            <option>普通</option>
+                                                            <option>开题</option>
+                                                            <option>中期</option>
+                                                            <option>结题</option>
+                                                        </select>
+                                                     </div>
+                                                    <div class="form-group">
+                                                        <input  name="file" type="file" value=""></div>
+                                                    <div class="form-group">
+                                                        <textarea  name="commits" class="form-control" placeholder="补充说明"  rows="3"></textarea>
+                                                    </div>
+                                                    <input type="hidden" name="selected_id" value="<%=@selected_title.id %>
+                                                    ">
+                                                <!-- Change this to a button or input when using this as a form -->
+                                                <input type="submit" class="btn btn-lg btn-success btn-block"/>
+                                               </fieldset>
+                                        </form>
+                                     </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <!-- /.panel-body --> </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed" onclick="update_tea_files_record(<%= @selected_title.id%>
+                            );"> <i class="fa fa-clock-o fa-fw"></i>
+                            历史提交与回复记录
+                        </a>
+                    </h4>
+                </div>
+
+                <!-- /.panel-heading -->
+                <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
+                    <div class="panel-body">
+                        <ul class="timeline" id="tea_files_record"></ul>
+                    </div>
+                </div>
+                <!-- /.panel-body --> </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed" >
+                            <i class="fa fa-warning fa-fw"></i>
+                            里程碑
+                        </a>
+                    </h4>
+                </div>
+
+                <!-- /.panel-heading -->
+                <div id="collapseFour" class="panel-collapse collapse" style="height: 0px;">
+                    <div class="panel-body">
+
+             <div class="row">
+                            <div class="col-lg-6">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">开题</div>
+                                    <div class="panel-body">
+                                        <%if @kaiti == 0%>
+                                        <p>未提交</p>
+                                        <%else%>
+                                        <div class="list-group">
+                                            <a href=<%="\"/secure/download/#{@kaitireport.download_path}\""%>
+                                                class="list-group-item">
+                                                <i class="fa fa-upload fa-fw"></i>
+                                                下载：
+                                                <span class="pull-right text-muted small"> <em><%= @kaitireport.file_name %></em>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="list-group-item">
+                                                <i class="fa fa-comment fa-fw"></i>
+                                                提交人：
+                                                <span class="pull-right text-muted small"> <em><%= @kaitireport.sname %></em>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="list-group-item">
+                                                <i class="fa fa-twitter fa-fw"></i>
+                                                提交日期：
+                                                <span class="pull-right text-muted small">
+                                                    <em>
+                                                        <%= @kaitireport.file_date %></em>
+                                                </span>
+                                            </a>
+
+                                        </div><div class="form-group">
+                                    <input class="form-control" placeholder="评分" value=<%="\"#{@kaitireport.score}\""%> name="score"  id="kaiti_score" autofocus="">
+                    </div>
+                    <div class="form-group">
+                                   <textarea  name="addend" id="kaiti_addend" class="form-control" placeholder="评语"  rows="3" value=<%="\"#{@kaitireport.addend}\""%> ><%="#{@kaitireport.addend}"%></textarea>
+
+
+                    </div>
+                    <div class="form-group">
+                    <button type="button" class="btn btn-block btn-lg btn-inverted" onclick=<%="\"submit('kaiti',#{@selected_title.id});\""%>>提交</button>
+                </div>
+                <%end%>
+                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">中期</div>
+                                    <div class="panel-body">
+                                        <%if @zhongqi == 0%>
+                                        <p>未提交</p>
+                                        <%else%>
+                                        <div class="list-group">
+                                            <a href=<%="\"/secure/download/#{@zhongqireport.download_path}\""%>
+                                                class="list-group-item">
+                                                <i class="fa fa-upload fa-fw"></i>
+                                                下载：
+                                                <span class="pull-right text-muted small">
+                                                    <em>
+                                                        <%= @zhongqireport.file_name %></em>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="list-group-item">
+                                                <i class="fa fa-comment fa-fw"></i>
+                                                提交人：
+                                                <span class="pull-right text-muted small">
+                                                    <em>
+                                                        <%= @zhongqireport.sname %></em>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="list-group-item">
+                                                <i class="fa fa-twitter fa-fw"></i>
+                                                提交日期：
+                                                <span class="pull-right text-muted small">
+                                                    <em>
+                                                        <%= @zhongqireport.file_date %></em>
+                                                </span>
+                                            </a>
+                                            </div>
+                                            <div class="form-group">
+                                    <input class="form-control" placeholder="评分" value=<%="\"#{@zhongqireport.score}\""%> name="score"  id="zhongqi_score" autofocus="">
+                    </div>
+                    <div class="form-group">
+                                    <textarea  name="addend" id="zhongqi_addend" class="form-control" placeholder="评语"  rows="3" value=<%="\"#{@zhongqireport.addend}\""%> ><%="#{@zhongqireport.addend}"%></textarea>
+                    </div>
+                    <div class="form-group">
+                    <button type="button" class="btn btn-block btn-lg btn-inverted" onclick=<%="\"submit('zhongqi',#{@selected_title.id});\""%>>提交</button>
+                </div>
+                                            <%end%>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+<div class="row" style="margin-top:30px;">
+    <div class="col-lg-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">结题</div>
+            <div class="panel-body">
+                <%if @jieti == 0%>
+                <p>未提交</p>
+                <%else%>
+                <div class="list-group">
+                    <a href=<%="\"/secure/download/#{@jietireport.download_path}\""%>
+                        class="list-group-item"> <i class="fa fa-upload fa-fw"></i>
+                        下载：
+                        <span class="pull-right text-muted small"> <em><%= @jietireport.file_name %></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item"> <i class="fa fa-comment fa-fw"></i>
+                        提交人：
+                        <span class="pull-right text-muted small"> <em><%= @jietireport.sname %></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-twitter fa-fw"></i>
+                        提交日期：
+                        <span class="pull-right text-muted small">
+                            <em>
+                                <%= @jietireport.file_date %></em>
+                        </span>
+                    </a>
+                    </div>
+                    <div class="form-group">
+                                    <input class="form-control" placeholder="评分" value=<%="\"#{@jietireport.score}\""%> name="score"  id="jieti_score" autofocus="">
+                    </div>
+                    <div class="form-group">
+                                   <textarea  name="addend" id="jieti_addend" class="form-control" placeholder="评语"  rows="3" value=<%="\"#{@jietireport.addend}\""%> ><%="#{@jietireport.addend}"%></textarea>
+                    </div>
+                    <div class="form-group">
+                    <button type="button" class="btn btn-block btn-lg btn-inverted" onclick=<%="\"submit('jieti',#{@selected_title.id});\""%>>提交</button>
+                </div>
+                    <%end%>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">结论</div>
+            <div class="panel-body">
+                <%if @jielun == 0%>
+                <p>未提交</p>
+                <%else%>
+                <div class="list-group">
+                    <a href=<%="\"/secure/download/#{@jielunreport.download_path}\""%>
+                        class="list-group-item">
+                        <i class="fa fa-upload fa-fw"></i>
+                        下载：
+                        <span class="pull-right text-muted small">
+                            <em>
+                                <%= @jielunreport.file_name %></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-comment fa-fw"></i>
+                        提交人：
+                        <span class="pull-right text-muted small">
+                            <em>
+                                <%= @jielunreport.sname %></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-twitter fa-fw"></i>
+                        提交日期：
+                        <span class="pull-right text-muted small">
+                            <em>
+                                <%= @jielunreport.file_date %></em>
+                        </span>
+                    </a>
+                    </div>
+                    <div class="form-group">
+                                    <input class="form-control" placeholder="评分" value=<%="\"#{@jielunreport.score}\""%> name="score"  id="jielun_score" autofocus="">
+                    </div>
+                    <div class="form-group">
+                                   <textarea  name="addend" id="jielun_addend" class="form-control" placeholder="评语"  rows="3" value=<%="\"#{@jielunreport.addend}\""%> ><%="#{@jielunreport.addend}"%></textarea>
+                    </div>
+
+                       <div class="form-group">
+                    <button type="button" class="btn btn-block btn-lg btn-inverted" onclick=<%="\"submit('jielun',#{@selected_title.id});\""%>>提交</button>
+                </div>
+                    <%end%>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+                    </div>
+
+            </div>
+
+
+                <!-- /.panel-body -->
+
+            <div class="chat-panel panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" onclick="update_t_message(<%= @selected_title.id%>
+                            );">
+                            <i class="fa fa-comments fa-fw"></i>
+                            聊天
+                        </a>
+                    </h4>
+
+                </div>
+                <!-- /.panel-heading -->
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul class="chat" id="message_t_record" ></ul>
+                    </div>
+                    <!-- /.panel-body -->
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="键入您的留言...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning btn-sm" id="btn-chat" onclick="send_t_message(<%= @selected_title.id%>
+                                    );">
+                                        发送
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+</div>

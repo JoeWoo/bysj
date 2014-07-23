@@ -1,0 +1,76 @@
+<div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header"><%=@iselected.content %> > <%= @kind%></h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<!-- /.col-lg-12 -->
+			<div class="panel panel-default">
+                <% if @milestone == :start %>
+	   <div class="panel-heading">开题报告提交</div>
+                <% end%>
+                 <% if @milestone == :middle %>
+                <div class="panel-heading">中期报告提交</div>
+                <% end%>
+                 <% if @milestone == :end %>
+                <div class="panel-heading">结题报告提交</div>
+                <% end%>
+                 <% if @milestone == :final %>
+                <div class="panel-heading">结论</div>
+                <% end%>
+	<!-- /.panel-heading -->
+	<div class="panel-body">
+		<div class="list-group">
+        <% if !@report.nil? %>
+		 <a href=<%="\"/secure/download/#{@report.download_path}\""%> class="list-group-item">
+                                    <i class="fa fa-upload fa-fw"></i>下载：
+                                    <span class="pull-right text-muted small"><em><%= @report.file_name %></em>
+                                    </span>
+                         </a>
+                         <a href="#" class="list-group-item">
+                                    <i class="fa fa-comment fa-fw"></i>提交人：
+                                    <span class="pull-right text-muted small"><em><%= @report.sname %></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-twitter fa-fw"></i>提交日期：
+                                    <span class="pull-right text-muted small"><em><%= @report.file_date %></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-envelope fa-fw"></i>评分：
+                                    <span class="pull-right text-muted small"><em><%= @report.score %></em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-tasks fa-fw"></i>评语：
+                                    <span class="pull-right text-muted small"><em><%= @report.addend %></em>
+                                    </span>
+                                </a>
+        <%else%>
+                        <form role="form" action="/secure/student/upload_files" enctype="multipart/form-data" method="post">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="文件主题" name="subject" type="text" autofocus="">
+                                </div>
+                                <input name="milestone" type="hidden" value=<%="\"#{@kind}\""%> />
+                                <input name="report" type="hidden" value="yes"/>
+                                 <div class="form-group">
+                                    <input  name="file" type="file" value="">
+                                </div>
+                                <div class="form-group">
+                                 <textarea  name="commits" class="form-control" placeholder="补充说明"  rows="3"></textarea>
+                                </div>
+                                <input type="submit" class="btn btn-lg btn-success btn-block"></input>
+                            </fieldset>
+                        </form>
+        <%end%>
+              </div>
+        </div>
+        	</div>
+
+	</div>
+</div>
+</div>

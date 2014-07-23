@@ -1,4 +1,28 @@
-<form action='/login/attempt' method='post' class="form-inline well">
-  <input type="text" name='username' placeholder="username" autofocus>
-  <input class="btn primary" type='submit' value='log in'>
+<form action='/login/attempt' method='post' class="form-horizontal well">
+<div class="form-group">
+    <label  class="col-sm-2 control-label">用户名：</label>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" name="username" placeholder="Username" autofocus>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" >密&nbsp;&nbsp;&nbsp;码：</label>
+    <div class="col-sm-3">
+      <input type="password" class="form-control" name='password'  placeholder="Password">
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label class="col-sm-2 control-label" >类&nbsp;&nbsp;&nbsp;型：</label>
+    <div class="col-sm-5">
+     <select class="input-sm col-sm-3"  name="type" value="学生">
+	  <option>学生</option>
+	  <option>教师</option>
+	  <option>管理员</option>
+    </select>
+     <button type="submit" class="btn  btn-primary col-sm-3" style="margin-left:30px;margin-top:-2px;"  >登录</button>
+    </div>
+
+  </div>
 </form>

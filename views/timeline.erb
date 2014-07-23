@@ -1,0 +1,63 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">公告</h1>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="timeline">
+            <% i=0 %>
+            <% @tips.each{ |tip|%>
+            <% if i == 0 %>
+                <li>
+                <div class="timeline-badge info"> <i class="fa fa-credit-card"></i>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title"><%= tip.tip_title%></h4>
+                            <p>
+                                <small class="text-muted"> <i class="fa fa-time"></i>
+                                    <%= tip.tip_date%>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p>
+                               <%= tip.tip%>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <% i= 1%>
+                <% else %>
+                         <li class="timeline-inverted">
+                    <div class="timeline-badge warning"> <i class="fa fa-credit-card"></i>
+                    </div>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title"><%= tip.tip_title%></h4>
+                             <p>
+                                <small class="text-muted"> <i class="fa fa-time"></i>
+                                    <%= tip.tip_date%>
+                                </small>
+                            </p>
+                        </div>
+                        <div class="timeline-body">
+                            <p>
+                             <%= tip.tip%>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <% i=0 %>
+                <% end %>
+                <%}%>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>

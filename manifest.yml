@@ -1,6 +1,6 @@
 ---
 applications:
-- name: bootstrap
+- name: 毕业设计管理系统
   memory: 128M
   instances: 1
   url: bootstrap.${target-base}
